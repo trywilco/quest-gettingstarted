@@ -3,6 +3,10 @@ hints:
   - Try to find what all the users that drop in the funnel have in common
 startFlow:
   do:
+    - actionId: github_open_issue
+      params:
+        title: "#INC-5312: Missing image"
+        body: It seems that when creating a new product without an image, there are broken images showing up in the product catalog. Please fix this by replicating this bug locally with mock data. Take a screenshot of the fix and attach it to a PR when you close the bug. There's a placeholder image in the repo that you can use named `placeholder.png`
     - actionId: bot_message
       params:
         person: head-of-rd
@@ -39,16 +43,17 @@ trigger:
                 message: "Excellent job @${user.githubuser}! You're now able to merge the PR."
         github_pr_workflow_complete_failure:
           do:
+            - actionId: github_pr_reject
+              params:
+                person: head-of-rd
+                message: Make sure all checks pass, only then you can merge the PR.
+
             - actionId: bot_message
               params:
                 person: head-of-rd
                 messages:
-                  - text: "Make sure all checks pass, only then you can merge the PR."
+                  - text: Make sure all checks pass, only then you can merge the PR.
                     delay: 2500
-            - actionId: github_pr_reject
-              params:
-                person: head-of-rd
-                message: "Make sure all checks pass, only then you can merge the PR."
         github_pr_merged:
           do:
             - actionId: finish_step

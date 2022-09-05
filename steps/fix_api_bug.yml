@@ -1,0 +1,64 @@
+id: fix_api_bug
+hints:
+  - Try to find what all the users that drop in the funnel have in common
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: head-of-rd
+        messages:
+          - text: You know what I hate more than bugs?
+            delay: 700
+          - text: Bugs that just won’t go away.
+            delay: 1200
+          - text: Looks like the root cause for your bug is still out there, and we’re forming a hunting party. Its participants? You.
+            delay: 1700
+          - text:  Yeah, you guessed right - we fixed the bug in the UI, but someone used our API and the bug is still happening in the backend.
+            delay: 2000
+trigger:
+  type: github_pr_lifecycle_status
+  flowNode:
+    switch:
+      key: "${eventType}"
+      cases:
+        github_pr_opened:
+          do:
+            - actionId: github_pr_comment
+              params:
+                person: head-of-rd
+                message: "On it! I'll review the changes as soon as possible! "
+        github_pr_workflow_complete_success:
+          do:
+            - actionId: bot_message
+              params:
+                person: head-of-rd
+                messages:
+                  - text: "Perfect @${user.githubuser}! You're now able to merge the PR."
+                    delay: 1500
+            - actionId: github_pr_approve
+              params:
+                person: head-of-rd
+                message: "Perfect ${user.firstName}! You're now able to merge the PR."
+        github_pr_workflow_complete_failure:
+          do:
+            - actionId: github_pr_reject
+              params:
+                person: head-of-rd
+                message: I don’t think it’ll work. Make sure it passes all checks, and  only then you’ll be able to merge the PR.
+
+            - actionId: bot_message
+              params:
+                person: head-of-rd
+                messages:
+                  - text: I don’t think it’ll work. Make sure it passes all checks, and  only then you’ll be able to merge the PR.
+                    delay: 2500
+        github_pr_merged:
+          do:
+            - actionId: finish_step
+
+githubActions:
+  backend:
+    capabilities:
+      - axios
+      - dotenv
+    testFile: "backend.js"
