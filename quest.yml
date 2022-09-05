@@ -1,0 +1,38 @@
+id: gettingstarted
+title: Fixing a Bug
+description: "Bugs are unavoidable. Sometimes, ignoring them isn’t really an option, and no amount of procrastination can make them disappear. The solution? Find the bug, then squash it! 
+This is what we’ll be doing here, complete with the sense of accomplishment upon witnessing your success."
+summary: "Ah, what a feeling, fixing a bug and making our users’ lives better. As you probably know (or will find out very soon), the only bug-free code is the one that hasn’t been written yet. Bugs are unavoidable in any software project, and fixing them is a crucial part of any engineer's experience. 
+We have to remember that a bug can often be fixed in several ways, each of them with its pros and cons. In this case, we saw how a bug could be eliminated from the frontend and the backend. These two options are equally valid, and picking between them in a real company would probably depend on the needs of the Product department or the use-case that we want to solve."
+level: beginner
+steps:
+  - fix_ui_bug
+duration: 2
+skills:
+  - frontend
+  - debugging
+  - documentation
+  - communication
+  - backend
+questDependency: docker_localsetup
+slogan: Every code has one.
+messages:
+  questStarted:
+    person: head-of-rd
+    messages:
+      - text: "Hey!"
+        delay: 500
+      - text: "Once again, before you do anything else, please **run the following command** on your repo: \`${scriptCommand}\`, and **let me know** once you're done."
+        delay: 1000
+  questStartedNotReady:
+    person: head-of-rd
+    messages:
+      - text: "Let me know when you are ready."
+        delay: 1000
+  questFinished:
+    person: head-of-rd
+    messages:
+      - text: "Beautiful! Can’t believe you’ve already finished another project! As usual, make sure you stretch your body and treat yourself to something yummy, before we set you up with [something new](${platform.home}) to work on."
+        delay: 1500
+      - text: "Let me know once you're ready for your [next thing](${platform.home}), ok?"
+        delay: 1000

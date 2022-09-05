@@ -1,0 +1,54 @@
+id: fix_ui_bug
+hints:
+  - Try to find what all the users that drop in the funnel have in common
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: head-of-rd
+        messages:
+          - text: "So, as I mentioned before, we have a critical bug in production that needs fixing."
+            delay: 2000
+          - text: "I'm opening an [issue on our Github repository](${user.repository}/issues) and assigning it to you - so you can have a look. Please fix it ASAP, and remember to submit a PR once you’re done."
+            delay: 4500
+          - text: "Oh, and in case you feel like you need to read more about this, I got you covered ;) - you can click [here](https://trywilco.notion.site/Simulation-3-Partial-data-84f002db325747028f10df61a0d95d11) for more useful information. "
+            delay: 10200
+trigger:
+  type: github_pr_lifecycle_status
+  flowNode:
+    switch:
+      key: "${eventType}"
+      cases:
+        github_pr_opened:
+          do:
+            - actionId: github_pr_comment
+              params:
+                person: head-of-rd
+                message: "Thanks @${user.githubuser}, I'll review the changes right away!"
+        github_pr_workflow_complete_success:
+          do:
+            - actionId: bot_message
+              params:
+                person: head-of-rd
+                messages:
+                  - text: "Excellent job ${user.firstName}! You're now able to merge the PR."
+                    delay: 1300
+            - actionId: github_pr_approve
+              params:
+                person: head-of-rd
+                message: "Excellent job @${user.githubuser}! You're now able to merge the PR."
+        github_pr_workflow_complete_failure:
+          do:
+            - actionId: bot_message
+              params:
+                person: head-of-rd
+                messages:
+                  - text: "Make sure all checks pass, only then you can merge the PR."
+                    delay: 2500
+            - actionId: github_pr_reject
+              params:
+                person: head-of-rd
+                message: "Make sure all checks pass, only then you can merge the PR."
+        github_pr_merged:
+          do:
+            - actionId: finish_step
