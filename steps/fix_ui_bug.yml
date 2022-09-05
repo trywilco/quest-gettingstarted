@@ -52,3 +52,8 @@ trigger:
         github_pr_merged:
           do:
             - actionId: finish_step
+
+githubActions:
+  frontend:
+    capabilities: []
+    testFile: "frontend.test.js"
