@@ -1,6 +1,6 @@
 id: fix_api_bug
 hints:
-  - Try to find what all the users that drop in the funnel have in common
+  - Try to get an item with no image from the API
 startFlow:
   do:
     - actionId: bot_message
