@@ -28,7 +28,7 @@ trigger:
             - actionId: github_pr_comment
               params:
                 person: head-of-rd
-                message: "Thanks @${user.githubuser}, I'll review the changes right away!"
+                message: "Thanks ${user.githubuser}, I'll review the changes right away!"
         github_pr_workflow_complete_success:
           do:
             - actionId: bot_message
@@ -40,7 +40,7 @@ trigger:
             - actionId: github_pr_approve
               params:
                 person: head-of-rd
-                message: "Excellent job @${user.githubuser}! You're now able to merge the PR."
+                message: "Excellent job ${user.githubuser}! You're now able to merge the PR."
         github_pr_workflow_complete_failure:
           do:
             - actionId: github_pr_reject

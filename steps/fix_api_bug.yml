@@ -33,7 +33,7 @@ trigger:
               params:
                 person: head-of-rd
                 messages:
-                  - text: "Perfect @${user.githubuser}! You're now able to merge the PR."
+                  - text: "Perfect ${user.githubuser}! You're now able to merge the PR."
                     delay: 1500
             - actionId: github_pr_approve
               params:
