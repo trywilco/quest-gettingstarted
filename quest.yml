@@ -13,6 +13,10 @@ skills:
   - documentation
   - communication
   - backend
+learningObjectives: 
+  - Analyzing log data 
+  - Reproducing a bug locally 
+  - Fixing a bug 
 questDependency: docker_localsetup
 slogan: Every code has one.
 messages:
