@@ -1,4 +1,6 @@
 id: fix_api_bug
+learningObjectives: 
+  - Fixing an API bug 
 hints:
   - Try to get an item with no image from the API
 startFlow:
