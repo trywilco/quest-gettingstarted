@@ -1,4 +1,6 @@
 id: fix_ui_bug
+learningObjectives: 
+  - Fixing a UI bug 
 hints:
   - Try to create a new item with no image
 startFlow:
