@@ -35,7 +35,8 @@ trigger:
                 message: "On it! I'll review the changes as soon as possible! "
         github_pr_workflow_complete_success:
           do:
-            - actionId: bot_message              params:
+            - actionId: bot_message
+              params:
                 person: head-of-rd
                 messages:
                   - text: "Perfect ${user.githubuser}! You're now able to merge the PR."
@@ -49,13 +50,13 @@ trigger:
             - actionId: github_pr_reject
               params:
                 person: head-of-rd
-                message: I don’t think it’ll work. Make sure it passes all checks, and  only then you’ll be able to merge the PR.
+                message: I don't think it'll work. Make sure it passes all checks, and  only then you'll be able to merge the PR.
 
             - actionId: bot_message
               params:
                 person: head-of-rd
                 messages:
-                  - text: I don’t think it’ll work. Make sure it passes all checks, and  only then you’ll be able to merge the PR.
+                  - text: I don't think it'll work. Make sure it passes all checks, and  only then you'll be able to merge the PR.
                     delay: 2500
         github_pr_merged:
           do:
