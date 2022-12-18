@@ -68,3 +68,50 @@ githubActions:
       - axios
       - dotenv
     testFile: "backend.js"
+
+solution:
+  do:
+    - actionId: bot_message
+      params:
+        person: head-of-rd
+        messages:
+          - text: Similar with the UI bug, we should start by figuring out the root cause, and try to reproduce it.
+          - text: What's the backend API that lets us fetch items?
+          - text: | 
+              We can dig through the backend code, or just examine the network calls on the frontend, and see that there are two routes for fetching items:
+              - `/api/items`
+              - `/api/items/${slug}`
+          - text: |
+              Let's use cURL to get the list of items, just run `curl <backend-address>/api/items` in your console (tip: you can add `| json_pp` in the end of the command, to get the output pretty printed). The result should be something like -
+              ```
+              $ curl https://roger-wilco-redesigned-space-waddle-jp5ppqpx6p4cq9ww-3000.preview.app.github.dev/api/items | json_pp
+              > {
+                "items" : [
+                    {
+                      "createdAt" : "2022-12-14T13:50:01.973Z",
+                      "description" : "Description",
+                      "favorited" : false,
+                      "favoritesCount" : 0,
+                      "image" : "", <--- no image!
+                      "seller" : {
+                          "following" : false,
+                          "image" : "https://static.productionready.io/images/smiley-cyrus.jpg",
+                          "username" : "roger-wilco"
+                      },
+                      "slug" : "title-zi5pit",
+                      "tagList" : [],
+                      "title" : "Title",
+                      "updatedAt" : "2022-12-14T13:50:01.973Z"
+                    }
+                ],
+                "itemsCount" : 1
+              }
+              ```
+            delay: 2000
+          - text: |
+              Once we've identified the root cause, solving it is fairly easy! A very common architecture in web-servers is:
+              - Have a model that define what the data looks like
+              - Fetch one or more elements
+              - Transform and serialize the data into `json` format. At this point, we can omit data we don't want to send to the client, or add some new properties
+          - text: The last step is exactly where we can fix our problem! 
+          - text: All you need to do is identify this part in the code, and make sure to send a placeholder image in case the database is missing one
