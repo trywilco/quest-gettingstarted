@@ -80,7 +80,7 @@ solution:
         messages: 
           - text: Alright, let's take a look and see how we can solve this one.
           - text: "In order to understand a bug, we should first reproduce it:"
-          - text: "- You can do that by running the marketplace on your codespace with `docker-compose up`, and then check the `PORTS`, right click on Frontend, and hit Preview In editor."
+          - text: "- You can do that by running the marketplace on your codespace with `docker-compose up`, and then check the `PORTS` section, right click on Frontend, and hit Preview In editor."
           - text: |
               - Quickly create a user, and then you'll be able to add a new item by clicking the button on the top right corner. You'll see that creating an item without an image URL will generate a broken preview
               ![broken preview](https://res.cloudinary.com/wilco/image/upload/v1671027890/wilco-assets/quests/fixing-a-bug/item-preview-broken_gavhk1.png)
