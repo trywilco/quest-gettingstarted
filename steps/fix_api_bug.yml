@@ -57,7 +57,11 @@ trigger:
                 person: head-of-rd
                 messages:
                   - text: I don't think it'll work. Make sure it passes all checks, and  only then you'll be able to merge the PR.
-                    delay: 2500
+                    delay: 500
+                  - text: If you don't know where to start, I suggest looking at the logs of the failed checks that were performed on your PR.
+                    delay: 300
+                  - text: This can provide valuable information and help you understand what went wrong.
+                    delay: 500
         github_pr_merged:
           do:
             - actionId: finish_step
