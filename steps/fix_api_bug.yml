@@ -77,7 +77,6 @@ solution:
   do:
     - actionId: bot_message
       params:
-        person: head-of-rd
         messages:
           - text: Similar with the UI bug, we should start by figuring out the root cause, and try to reproduce it.
           - text: What's the backend API that lets us fetch items?
