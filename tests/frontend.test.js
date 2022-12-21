@@ -17,6 +17,7 @@ test("Check that ItemPreview will have a placeholder for image", () => {
             name: "seller",
         },
         tag_list: ["tag1"],
+        image: "",
     };
 
     const testRenderer = TestRenderer.create(
