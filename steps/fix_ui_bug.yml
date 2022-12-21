@@ -76,7 +76,6 @@ solution:
   do:
     - actionId: bot_message
       params:
-        person: head-of-rd
         messages: 
           - text: Alright, let's take a look and see how we can solve this one.
           - text: "In order to understand a bug, we should first reproduce it:"
