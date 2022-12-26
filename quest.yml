@@ -6,7 +6,7 @@ level: beginner
 steps:
   - fix_ui_bug
   - fix_api_bug
-duration: 2
+duration: 1
 skills:
   - frontend
   - debugging
