@@ -58,7 +58,7 @@ trigger:
             params:
               person: head-of-rd
               messages:
-                - text: "Let's start by understanding the bug"
+                - text: "Sure! Let's start by understanding the bug"
                   delay: 2000
                 - text: "To fix this bug, you will need to identify the root cause and take the appropriate action. This may involve checking the file path, ensuring the image is in a supported format and not corrupt, verifying the encoding, or troubleshooting the server or network connection."
                   delay: 2000
