@@ -23,7 +23,7 @@ startFlow:
             delay: 4500
           - text: "Oh, and in case you feel like you need to read more about this, I got you covered ;) - you can click [here](https://trywilco.notion.site/Simulation-3-Partial-data-84f002db325747028f10df61a0d95d11) for more useful information. "
             delay: 10200
-          - text: "Would you like to get further guidance about this task?"
+          - text: "Do you feel ready to tackle this bug? Let me know if you'd like further guidance about this task"
             delay: 10200
           - components:
               - type: form
@@ -33,12 +33,12 @@ startFlow:
                   randomized: true
                   select_limit: 1
                   options:
-                    - value: 'Please elaborate'
-                      label: 'yes'
+                    - value: yes
+                      label: Can you elaborate?
                       variant: primary # optional, default: primary
 
-                    - value: I'm good
-                      label: 'no'
+                    - value: no
+                      label: "I'm good"
                       variant: secondary
 
 trigger:
