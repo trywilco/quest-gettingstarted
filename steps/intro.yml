@@ -6,7 +6,13 @@ startFlow:
     - actionId: github_open_issue
       params:
         title: "#INC-5312: Missing image"
-        body: It seems that when creating a new product without an image, there are broken images showing up in the product catalog. Please fix this by replicating this bug locally with mock data. Take a screenshot of the fix and attach it to a PR when you close the bug. There's a placeholder image in the repo that you can use named `placeholder.png`
+        body: |
+          It seems that when creating a new product without an image, there are broken images showing up in the product catalog. 
+          
+          Try and reproduce this issue locally by creating some imageless items, and then make sure that the frontend always renders a placeholder image. 
+          
+          You can find a placeholder image in the repository, it's called `placeholder.png`.
+          Once you fix this issue, open a PR and attach a screenshot of the fixed UI.    - actionId: bot_message
     - actionId: bot_message
       params:
         person: head-of-rd
