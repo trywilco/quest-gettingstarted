@@ -1,0 +1,67 @@
+id: intro
+hints:
+  - Try to find what all the users that drop in the funnel have in common
+startFlow:
+  do:
+    - actionId: github_open_issue
+      params:
+        title: "#INC-5312: Missing image"
+        body: It seems that when creating a new product without an image, there are broken images showing up in the product catalog. Please fix this by replicating this bug locally with mock data. Take a screenshot of the fix and attach it to a PR when you close the bug. There's a placeholder image in the repo that you can use named `placeholder.png`
+    - actionId: bot_message
+      params:
+        person: head-of-rd
+        messages:
+          - text: "So, as I mentioned before, we have a critical bug in production that needs fixing."
+            delay: 2000
+          - text: "I'm opening an [issue on our Github repository](${user.repository}/issues) and assigning it to you - so you can have a look. Please fix it ASAP, and remember to submit a PR once you’re done."
+            delay: 4500
+          - text: "Oh, and in case you feel like you need to read more about this, I got you covered ;) - you can click [here](https://trywilco.notion.site/Simulation-3-Partial-data-84f002db325747028f10df61a0d95d11) for more useful information. "
+            delay: 10200
+          - text: "Would you like to get further guidance about this task?"
+            delay: 10200
+          - components:
+              - type: form
+                form:
+                  id: more_info
+                  type: single_select_form
+                  randomized: true
+                  select_limit: 1
+                  options:
+                    - value: 'Please elaborate'
+                      label: 'yes'
+                      variant: primary # optional, default: primary
+
+                    - value: I'm good
+                      label: 'no'
+                      variant: secondary
+
+trigger:
+  type: chat_form_submitted
+  params:
+    formId: more_info
+  flowNode:
+    if:
+      conditions:
+        - conditionId: text_contains_strings
+          params:
+            text: "${{formSubmission}}"
+            strings:
+              - yes
+      then:
+        do:
+          - actionId: bot_message
+            params:
+              person: head-of-rd
+              messages:
+                - text: "Let's start by understadnding the bug. To fix this bug, you will need to identify the root cause and take the appropriate action. This may involve checking the file path, ensuring the image is in a supported format and not corrupt, verifying the encoding, or troubleshooting the server or network connection."
+                  delay: 2000
+          - actionId: finish_step
+      else:
+        do:
+          - actionId: bot_message
+            params:
+              person: head-of-rd
+              messages:
+                - text: Fine then, go ahead and fix the bug
+                  delay: 2500
+          - actionId: finish_step

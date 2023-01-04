@@ -1,31 +1,14 @@
 id: fix_ui_bug
-learningObjectives: 
-  - Fixing a UI bug 
 hints:
-  - Try to create a new item with no image
+  - Try to find what all the users that drop in the funnel have in common
 startFlow:
   do:
-    - actionId: github_open_issue
-      params:
-        title: "#INC-5312: Missing image"
-        body: |
-          It seems that when creating a new product without an image, there are broken images showing up in the product catalog. 
-          
-          Try and reproduce this issue locally by creating some imageless items, and then make sure that the frontend always renders a placeholder image. 
-          
-          You can find a placeholder image in the repository, it's called `placeholder.png`.
-
-          Once you fix this issue, open a PR and attach a screenshot of the fixed UI.
     - actionId: bot_message
       params:
         person: head-of-rd
         messages:
-          - text: "So, as I mentioned before, we have a critical bug in production that needs fixing."
+          - text: "Now that we understand the bug a little better, let's open a fix PR"
             delay: 2000
-          - text: "I'm opening an [issue on our Github repository](${user.repository}/issues) and assigning it to you - so you can have a look. Please fix it ASAP, and remember to submit a PR once you’re done."
-            delay: 4500
-          - text: "Oh, and in case you feel like you need to read more about this, I got you covered ;) - you can click [here](https://trywilco.notion.site/Simulation-3-Partial-data-84f002db325747028f10df61a0d95d11) for more useful information. "
-            delay: 10200
 trigger:
   type: github_pr_lifecycle_status
   flowNode:
@@ -37,7 +20,7 @@ trigger:
             - actionId: github_pr_comment
               params:
                 person: head-of-rd
-                message: "Thanks ${user.githubuser}, I'll review the changes right away!"
+                message: "Thanks @${user.githubuser}, I'll review the changes right away!"
         github_pr_workflow_complete_success:
           do:
             - actionId: bot_message
@@ -49,7 +32,7 @@ trigger:
             - actionId: github_pr_approve
               params:
                 person: head-of-rd
-                message: "Excellent job ${user.githubuser}! You're now able to merge the PR."
+                message: "Excellent job @${user.githubuser}! You're now able to merge the PR."
         github_pr_workflow_complete_failure:
           do:
             - actionId: github_pr_reject
@@ -71,24 +54,3 @@ githubActions:
   frontend:
     capabilities: []
     testFile: "frontend.test.js"
-
-solution:
-  do:
-    - actionId: bot_message
-      params:
-        messages: 
-          - text: Alright, let's take a look and see how we can solve this one.
-          - text: "In order to understand a bug, we should first reproduce it:"
-          - text: "- You can do that by running the marketplace on your codespace with `docker-compose up`, and then check the `PORTS` section, right click on Frontend, and hit Preview In editor."
-          - text: |
-              - Quickly create a user, and then you'll be able to add a new item by clicking the button on the top right corner. You'll see that creating an item without an image URL will generate a broken preview
-              ![broken preview](https://res.cloudinary.com/wilco/image/upload/v1671027890/wilco-assets/quests/fixing-a-bug/item-preview-broken_gavhk1.png)
-          - text: "Now we need to find the component that renders the UI:"
-            delay: 5000
-          - text: "- Digging into the code, we see that the index contains a `MainView` components, which renders `ItemList` , which renders a list of items using the `ItemPreview` component"
-          - text: "- That component is responsible for rendering our UI, and has an `img` tag which just uses the provided URL."
-          - text: "- What happens when an no url is provided? That's right, we'll have a broken image tag rendered."
-          - text: |
-              - How can we handle it? On the frontend, the easiest trick would be to check if a no image URL was provided, and replace it with our placeholder! Once you do that, the item preview should look like this:
-              ![working preview](https://res.cloudinary.com/wilco/image/upload/v1671030352/wilco-assets/quests/fixing-a-bug/item-preview-working_qln8io.png)
-          - text: Much better, isn't it? Now all you have to do is follow my lead, fix this in your environment, and submit a pull request!
