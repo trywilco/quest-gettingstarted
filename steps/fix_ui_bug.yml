@@ -7,7 +7,7 @@ startFlow:
       params:
         person: head-of-rd
         messages:
-          - text: "Now that we understand the bug a little better, let's open a fix PR"
+          - text: "Now that we have all the info about the bug, let's open a fix PR"
             delay: 2000
 trigger:
   type: github_pr_lifecycle_status
