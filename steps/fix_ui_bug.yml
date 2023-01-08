@@ -9,7 +9,7 @@ startFlow:
       params:
         person: head-of-rd
         messages:
-          - text: "Now we understand the source of our issue, we should go ahead an fix it!"
+          - text: "Now that we understand the source of our issue, we should go ahead an fix it!"
             delay: 2000
           - text: "Once your fix is ready, open a PR (Pull Request) and I'll be reviewing it in no time"
             delay: 2000
@@ -64,11 +64,12 @@ solution:
     - actionId: bot_message
       params:
         messages: 
-          - text: The best time to solve this bug is exactly, now!.
-          - text: "- As we understood earlier, when an no url is provided we'll have a broken image tag rendered."
+          - text: Great. best time to solve this bug is exactly, well, now!
+          - text: "- As we understood earlier, when an no url is provided for the image source, we'll have a broken image tag rendered."
           - text: |
               - How can we handle it? On the frontend, the easiest trick would be to check if a no image URL was provided, and replace it with our placeholder!
-               A great solutin here is also a simple one, we can set a fallback image `src` like so: `src={item.image || placeholderImage}`
+                A great solutin here is also a simple one, we can set a fallback image `src` like so: `src={item.image || placeholderImage}`
+          - text: |
                Once you do that, the item preview should look like this:
-              ![working preview](https://res.cloudinary.com/wilco/image/upload/v1671030352/wilco-assets/quests/fixing-a-bug/item-preview-working_qln8io.png)
+               ![working preview](https://res.cloudinary.com/wilco/image/upload/v1671030352/wilco-assets/quests/fixing-a-bug/item-preview-working_qln8io.png)
           - text: Much better, isn't it? Now all you have to do is follow my lead, fix this in your environment, and submit a pull request!
