@@ -59,12 +59,11 @@ trigger:
             - text: Hmmm, I'm not sure that the exact source of the issue, any other ideas? And don't forget you can ask for help any time. 
             delay: 1000
 
-
 solution:
   do:
     - actionId: bot_message
       params:
-        messages: 
+        messages:
           - text: Alright, let's take a look and see how we can solve this one.
           - text: "In order to understand a bug, we should first reproduce it:"
           - text: "- You can do that by running the marketplace on your codespace with `docker-compose up`, and then check the `PORTS` section, right click on Frontend, and hit Preview In editor."
@@ -76,3 +75,7 @@ solution:
           - text: "- Digging into the code, we see that the index contains a `MainView` components, which renders `ItemList` , which renders a list of items using the `ItemPreview` component"
           - text: "- That component is responsible for rendering our UI, and has an `img` tag which just uses the provided URL."
           - text: "- What happens when an no url is provided? That's right, we'll have a broken image tag rendered."
+          - text: |
+              - How can we handle it? On the frontend, the easiest trick would be to check if a no image URL was provided, and replace it with our placeholder! Once you do that, the item preview should look like this:
+              ![working preview](https://res.cloudinary.com/wilco/image/upload/v1671030352/wilco-assets/quests/fixing-a-bug/item-preview-working_qln8io.png)
+          - text: Much better, isn't it? Now all you have to do is follow my lead, fix this in your environment, and submit a pull request!
