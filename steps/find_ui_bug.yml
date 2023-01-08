@@ -1,0 +1,77 @@
+id: find_ui_bug
+learningObjectives: 
+  - Understanding UI rendering
+hints:
+  - Try to create a new item with no image
+  - Search for where the image should be rendered to the screen, and I suggest focusing on the frontend implementation for now.
+startFlow:
+  do:
+    - actionId: github_open_issue
+      params:
+        title: "#INC-5312: Missing image"
+        body: |
+          It seems that when creating a new product without an image, there are broken images showing up in the product catalog. 
+          
+          Try and reproduce this issue locally by creating some imageless items, and then make sure that the frontend always renders a placeholder image. 
+          
+          You can find a placeholder image in the repository, it's called `placeholder.png`.
+    - actionId: bot_message
+      params:
+        person: head-of-rd
+        messages:
+          - text: "So, as I mentioned before, we have a critical bug in production that needs fixing."
+            delay: 2000
+          - text: "I'm opening an [issue on our Github repository](${user.repository}/issues) and assigning it to you - so you can have a look. Please fix it ASAP, and remember to submit a PR once you’re done."
+            delay: 4500
+          - text: "Oh, and in case you feel like you need to read more about this, I got you covered ;) - you can click [here](https://trywilco.notion.site/Simulation-3-Partial-data-84f002db325747028f10df61a0d95d11) for more useful information. "
+            delay: 10200
+          - text: "Try to reprdoce this bug and understand its source."
+            delay: 10200
+          - text: ":instruction[Once you've located the file with the UI bug, send me the file name.] **Or just let me know if you need any more assistance!**'"
+            delay: 10200
+trigger:
+  type: user_message
+  params:
+    person: head-of-rd
+  flowNode:
+    if:
+      - conditionId: text_contains_strings
+        params:
+          text: "${userMessageText}"
+          strings:
+          - - itemPreview
+      then:
+        do:
+        - actionId: bot_message
+          params:
+            person: head-of-rd
+            messages:
+            - text: That's spot on!
+              delay: 1000
+        - actionId: finish_step
+      else:
+        do:
+        - actionId: bot_message
+          params:
+            person: head-of-rd
+            messages:
+            - text: Hmmm, I'm not sure that the exact source of the issue, any other ideas? And Don't forget you can ask for help any time. 
+              delay: 1300
+
+
+solution:
+  do:
+    - actionId: bot_message
+      params:
+        messages: 
+          - text: Alright, let's take a look and see how we can solve this one.
+          - text: "In order to understand a bug, we should first reproduce it:"
+          - text: "- You can do that by running the marketplace on your codespace with `docker-compose up`, and then check the `PORTS` section, right click on Frontend, and hit Preview In editor."
+          - text: |
+              - Quickly create a user, and then you'll be able to add a new item by clicking the button on the top right corner. You'll see that creating an item without an image URL will generate a broken preview
+              ![broken preview](https://res.cloudinary.com/wilco/image/upload/v1671027890/wilco-assets/quests/fixing-a-bug/item-preview-broken_gavhk1.png)
+          - text: "Now we need to find the component that renders the UI:"
+            delay: 5000
+          - text: "- Digging into the code, we see that the index contains a `MainView` components, which renders `ItemList` , which renders a list of items using the `ItemPreview` component"
+          - text: "- That component is responsible for rendering our UI, and has an `img` tag which just uses the provided URL."
+          - text: "- What happens when an no url is provided? That's right, we'll have a broken image tag rendered."
