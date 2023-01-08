@@ -35,27 +35,28 @@ trigger:
     person: head-of-rd
   flowNode:
     if:
-      - conditionId: text_contains_strings
-        params:
-          text: "${userMessageText}"
-          strings:
-          - - itemPreview
-      then:
-        do:
-        - actionId: bot_message
+      conditions:
+        - conditionId: text_contains_strings
           params:
-            person: head-of-rd
-            messages:
-            - text: That's spot on!
-              delay: 1000
-        - actionId: finish_step
-      else:
-        do:
-        - actionId: bot_message
-          params:
-            person: head-of-rd
-            messages:
-            - text: Hmmm, I'm not sure that the exact source of the issue, any other ideas? And Don't forget you can ask for help any time. 
+            text: "${userMessageText}"
+            strings:
+            - itemPreview
+        then:
+          do:
+          - actionId: bot_message
+            params:
+              person: head-of-rd
+              messages:
+              - text: That's spot on!
+                delay: 1000
+          - actionId: finish_step
+        else:
+          do:
+          - actionId: bot_message
+            params:
+              person: head-of-rd
+              messages:
+              - text: Hmmm, I'm not sure that the exact source of the issue, any other ideas? And Don't forget you can ask for help any time. 
               delay: 1300
 
 
