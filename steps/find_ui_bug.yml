@@ -76,4 +76,4 @@ solution:
           - text: "- Digging into the code, we see that the index contains a `MainView` components, which renders `ItemList` , which renders a list of items using the `ItemPreview` component"
           - text: "- That component is responsible for rendering our UI, and has an `img` tag which just uses the provided URL."
           - text: "- What happens when an no url is provided? That's right, we'll have a broken image tag rendered."
-          - text: "Now that we understand the source of the issue, :instruction[pass me the problematic file.]"
+          - text: "Now that we understand the source of the issue, :instruction[send me the problematic file.]"
