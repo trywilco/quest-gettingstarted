@@ -17,11 +17,6 @@ skills:
 questDependency: docker_localsetup
 slogan: Every code has one.
 messages:
-  questStartedNotReady:
-    person: head-of-rd
-    messages:
-      - text: "Let me know when you are ready."
-        delay: 1000
   questFinished:
     person: head-of-rd
     messages:
