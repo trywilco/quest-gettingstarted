@@ -63,6 +63,7 @@ solution:
   do:
     - actionId: bot_message
       params:
+        person: head-of-rd
         messages: 
           - text: Great. best time to solve this bug is exactly, well, now!
           - text: "- As we understood earlier, when an no url is provided for the image source, we'll have a broken image tag rendered."
