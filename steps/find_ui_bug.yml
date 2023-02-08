@@ -63,6 +63,7 @@ trigger:
 solution:
   do:
     - actionId: bot_message
+      person: head-of-rd
       params:
         messages: 
           - text: Alright, let's take a look and see how we can solve this one.
